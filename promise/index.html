@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise</title>
+</head>
+<body>
+	<pre>
+		var div = document.getElementById('demo');
+		var p = new Promise(function(resolve, reject){
+			setTimeout(function(){
+				resolve('promise创建');
+			}, 2000);
+		});
+		
+		p.then(function(val){
+			div.innerHTML += ("&lt;br /&gt;" + val);
+			return "第一层then函数";
+		})
+		.then(function(val){
+			div.innerHTML += ("&lt;br /&gt;" + val);
+			throw '第二层then出错啦';
+		})
+		.catch(function(err){
+			div.innerHTML += ('&lt;br /&gt;' + err)
+		})
+	</pre>
+	<div id="demo">promise演示</div>
+	<script src="Promise.js"></script>
+	<script>
+		var div = document.getElementById('demo');
+		var p = new Promise(function(resolve, reject){
+			setTimeout(function(){
+				resolve('promise创建');
+			}, 2000);
+		});
+		
+		p.then(function(val){
+			div.innerHTML += ("<br />" + val);
+			return "第一层then函数";
+		})
+		.then(function(val){
+			div.innerHTML += ("<br />" + val);
+			throw '第二层then出错啦';
+		})
+		.catch(function(err){
+			div.innerHTML += ('<br />' + err)
+		})
+	</script>
+</body>
+</html>
