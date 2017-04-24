@@ -32,4 +32,5 @@
 ## 参考
 
 [张鑫旭-CSS/CSS3长度、时间、频率、角度单位大全](http://www.zhangxinxu.com/wordpress/2011/03/css-css3-unit-units/)  
-[CSS Value Lengths, Times, Frequencies and Angles](http://www.standardista.com/css3/css-values-lengths-times-frequenc-angles)
+[CSS Value Lengths, Times, Frequencies and Angles](http://www.standardista.com/css3/css-values-lengths-times-frequenc-angles)  
+[css兼容性查询](http://caniuse.com/)
