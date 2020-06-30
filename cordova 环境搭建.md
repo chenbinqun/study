@@ -59,12 +59,58 @@
 
 * 测试是否配置成功：adb --version
 
-##### 如果sdk manager 闪退则需要查看android-sdk-windows\tools\lib\find_java.bat中java路劲是否正确，或者查看android-sdk-windows\tools\android.bat中java路径是否正确
+```
+	注：如果sdk manager 闪退则需要查看android-sdk-windows\tools\lib\find_java.bat中java路劲是否正确，或者查看android-sdk-windows\tools\android.bat中java路径是否正确
+```
 
 #### 调试android环境，可使用<code>cordova run android</code>来调试
 
 #### 如果想打包则可以使用<code>cordova build android</code>来apk包，生成apk包路径在<code>platforms → android → app → build → outputs → apk → debug</code>
 
+#### APK签名: APK都必须经过数字签名后才能安装到设备上，签名需要对应的证书（keystore）
+```
+	// 生成签名文件(keytool，jarsigner命令是java自带的如果没有配置环境变量则需要进入jdk->bin文件夹)
+	keytool -genkey -v -keystore D:\mytest.keystore -alias mytest -keyalg RSA -validity 20000
+	
+	/**
+	* -keystore D:/mytest.keystore表示生成的证书及其存放路径，如果直接写文件名则默认生成在用户当前目录下；
+　　* -alias mytest 表示证书的别名是mytest,不写这一项的话证书名字默认是mykey；
+　　* -keyalg RSA 表示采用的RSA算法；
+　　* -validity 20000表示证书的有效期是20000天。
+	*
+	*
+	* 根据指令输入密钥库口令，是不可见的。依次输入下面的问题。最后到【否】那里时输入y
+	* 再输入密钥口令（可以与密钥库口令相同），如果相同，直接回车，记住这两个口令，后面签名会使用到。
+	* 这时便会生成一个文件mytest.keystore，就是我们需要的签名文件。
+	*/
+```
+
+* 手动加签
+```
+	// 首先执行命令
+	cordova build android --release
+	// 就会生成一个app-release-unsigned.apk。把数字签名放到生成的未签名的apk所在的目录下，输入以下命令：
+	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mytest.keystore app-release-unsigned.apk mytest
+	// 这时的apk就会是一个已经签名的apk了，修改一下名字即可直接放到设备上安装。
+```
+
+* 自动加签
+```
+	// 在项目根目录创建build.json
+	{
+　　	”android”: {
+	　　　　”release”: {
+	　　　　　　”keystore”: “mytest.keystore”, // 签名位置
+	　　　　　　”alias”: “mytest”,			   // 别名
+ 	　　　　　　”storePassword”: “testing”,	   // 密码
+	　　　　　　”password”: “testing2”		   // 密码
+	　　　　}　　
+	　　}
+　　}
+	// 创建完后直接编译apk包则可以自动加签
+	cordova build –release
+	// 注意：cordova build后面没有android
+```
 
 
 
