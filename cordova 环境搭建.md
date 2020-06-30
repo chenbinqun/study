@@ -113,6 +113,25 @@
 ```
 
 
+##### 如果编译android出现一下错误,解决方案
+```
+Failed to install the following Android SDK packages as some licences have not been accepted.
+     platforms;android-28 Android SDK Platform 28
+  To build this project, accept the SDK license agreements and install the missing components using the Android Studio SDK Manager.
+  Alternatively, to transfer the license agreements from one workstation to another, see http://d.android.com/r/studio-ui/export-licenses.html
+```
 
+1. 进入<code>android-sdk-widnow/tools/bin</code>
+2. 执行命令<code>./sdkmanager --update</code>，执行过程需要多次确认
+3. 这时可以尝试是否能够正常构建项目，有可能遇到下面提示的问题（或是其中的一个提示）
+```
+	Warning: License for package Android SDK Build-Tools 27.0.3 not accepted.
+	Warning: License for package Android SDK Platform 28 not accepted.
+
+	// 应该是本地下载的版本和配置的没有对应上，只需要通过 sdkmanager 下载项目配置的版本即可。
+    // 例如（具体请了解 sdkmanager 命令的使用）：
+	// 同时安装多个包
+	sdkmanager "platform-tools" "build-tools;28.0.3" "platforms;android-28"
+```
 
 
