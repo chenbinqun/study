@@ -108,8 +108,7 @@
 		}
 	}
 	// 创建完后直接编译apk包则可以自动加签
-	cordova build –-release
-	// 注意：cordova build后面没有android
+	cordova build android –-release
 ```
 
 
