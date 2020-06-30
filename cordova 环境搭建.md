@@ -98,17 +98,17 @@
 ```
 	// 在项目根目录创建build.json
 	{
-　　	”android”: {
-	　　　　”release”: {
-	　　　　　　”keystore”: “mytest.keystore”, // 签名位置
-	　　　　　　”alias”: “mytest”,			   // 别名
- 	　　　　　　”storePassword”: “testing”,	   // 密码
-	　　　　　　”password”: “testing2”		   // 密码
-	　　　　}　　
-	　　}
-　　}
+		"android": {
+			"release": {
+				"keystore": "mytest.keystore",
+				"alias": "mytest",
+				"storePassword": "123456",
+				"password": "123456"
+			}
+		}
+	}
 	// 创建完后直接编译apk包则可以自动加签
-	cordova build –release
+	cordova build –-release
 	// 注意：cordova build后面没有android
 ```
 
